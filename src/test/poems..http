@@ -1,0 +1,49 @@
+### Test root endpoint
+GET http://localhost:7071/api/poem/
+
+###
+
+### Get all poems
+GET http://localhost:7071/api/poem/poems
+
+###
+
+### Create new poem FEJLER
+POST http://localhost:7071/api/poem/poems
+Content-Type: application/json
+
+{
+  "id": 9,
+  "style": "Lyric",
+  "text": "Sing, O heart, of joy untold, where silver rivers gleam with gold. A melody that lifts the skies, in whispered notes where beauty lies.",
+  "author": "ukendt/anonym"
+}
+
+###
+
+### Update poem by ID
+PUT http://localhost:7071/api/poem/poems/1
+Content-Type: application/json
+
+{
+  "id": 9,
+  "style": "Lyric",
+  "text": "test",
+  "author": "ukendt/anonym"
+}
+
+###
+
+### Get specific poem by ID
+GET http://localhost:7071/api/poem/poems/3
+
+###
+
+### Delete poem by ID
+DELETE http://localhost:7071/api/poem/poems/2
+
+###
+
+### poem deletion
+GET http://localhost:7071/api/poem/poems/2
+

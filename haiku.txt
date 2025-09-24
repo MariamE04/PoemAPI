@@ -1,0 +1,71 @@
+Style: Haiku
+Matsuo Bashō (1644–1694)
+
+Old silent pond…
+A frog jumps into the pond—
+Splash! Silence again.
+-----------------------------------
+Style: Limerick
+ukendt/anonym
+
+There once was a man from the coast,
+Who fancied his tea with some toast.
+He slipped on a rug,
+While chasing a bug,
+And now he just haunts as a ghost.
+------------------------------------
+Style: Senryu
+ukendt/anonym
+
+Morning train delayed,
+strangers sigh with weary eyes,
+coffee grows colder.
+------------------------------------
+Style: Tanka
+ukendt/anonym
+
+Cherry blossoms fall,
+whispers drift across the breeze,
+softly they vanish,
+leaving echoes in my heart,
+a season of fleeting love.
+-----------------------------------
+Style: Sonnet
+William Shakespeare (Sonnet 18, ca. 1609)
+
+Shall I compare thee to a summer's day?
+Thou art more lovely and more temperate:
+Rough winds do shake the darling buds of May,
+And summer’s lease hath all too short a date.
+
+---------------------------------------
+Style: Ode
+ukendt/anonym
+
+Ode to the morning sun,
+you rise and the darkness flees,
+with golden fire you paint the sky,
+and wake the world anew.
+
+----------------------------------------
+Style: Ballad
+ukendt/anonym
+
+She walked the cliffs by moonlight pale,
+Her song was carried on the gale.
+A sailor lost, she mourned that night,
+Her voice the beacon, faint with fright.
+
+------------------------------------------
+Style: Free verse
+ukendt/anonym
+
+The city hums,
+not with voices,
+but with the echoes of a thousand lives.
+Each window a story,
+each shadow a memory.
+
+-------------------------------------------
+
+
