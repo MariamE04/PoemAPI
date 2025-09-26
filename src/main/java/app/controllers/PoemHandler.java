@@ -4,6 +4,7 @@ import app.DAO.PoemDAO;
 import app.config.HibernateConfig;
 import app.dtos.PoemDTO;
 import app.entities.Poem;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 import jakarta.persistence.EntityManagerFactory;
@@ -12,6 +13,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.core.type.TypeReference;
+
 
 public class PoemHandler {
 
@@ -22,17 +25,70 @@ public class PoemHandler {
     private static final Logger logger = LoggerFactory.getLogger(PoemHandler.class);
     private static final Logger debugLogger = LoggerFactory.getLogger("app");
 
-    public void createPoem(Context ctx) {
-        PoemDTO dto = ctx.bodyAsClass(PoemDTO.class);
-        Poem poem = new Poem();
-        poem.setStyle(dto.getStyle());
-        poem.setText(dto.getText());
-        poem.setAuthor(dto.getAuthor());
+   /* public void createPoem(Context ctx) {
+        try {
+            String body = ctx.body();
+            logger.info("POST /poems body: {}", body);
 
-        Poem saved = dao.create(poem);
-        ctx.status(HttpStatus.CREATED);
-        ctx.json(new PoemDTO(saved));
+            PoemDTO dto = ctx.bodyAsClass(PoemDTO.class);
+            if (dto.getStyle() == null || dto.getText() == null || dto.getAuthor() == null) {
+                ctx.status(400).result("Missing required fields");
+                return;
+            }
+
+            Poem poem = Poem.builder()
+                    .style(dto.getStyle())
+                    .text(dto.getText())
+                    .author(dto.getAuthor())
+                    .build();
+
+            Poem saved = dao.create(poem);
+            ctx.status(HttpStatus.CREATED).json(new PoemDTO(saved));
+        } catch (Exception e) {
+            logger.error("Failed to create poem", e);
+            ctx.status(HttpStatus.INTERNAL_SERVER_ERROR).result(e.getMessage());
+        }
+    } */
+
+
+
+    public void createPoems(Context ctx) {
+        try {
+            String body = ctx.body().trim();
+            ObjectMapper mapper = new ObjectMapper();
+
+            List<PoemDTO> dtos;
+
+            if (body.startsWith("[")) {
+                dtos = mapper.readValue(body, new TypeReference<List<PoemDTO>>() {});
+            } else {
+                dtos = List.of(mapper.readValue(body, PoemDTO.class));
+            }
+
+            List<PoemDTO> saved = new ArrayList<>();
+            for (PoemDTO dto : dtos) {
+                Poem poem = Poem.builder()
+                        .style(dto.getStyle())
+                        .text(dto.getText())
+                        .author(dto.getAuthor())
+                        .build();
+                saved.add(new PoemDTO(dao.create(poem)));
+            }
+
+            // Hvis kun ét poem blev sendt, returner det som objekt i stedet for liste
+            if (saved.size() == 1) {
+                ctx.status(201).json(saved.get(0));
+            } else {
+                ctx.status(201).json(saved);
+            }
+
+        } catch (Exception e) {
+            ctx.status(500).result(e.getMessage());
+        }
     }
+
+
+
 
     public void getAllPoems(Context ctx) {
         List<Poem> poems = dao.getAll();
@@ -74,7 +130,7 @@ public class PoemHandler {
 
         if (deleted) {
             ctx.result("Poem with id " + id + " deleted");
-            ctx.status(HttpStatus.OK);
+            ctx.status(HttpStatus.NO_CONTENT);
         } else {
             ctx.result("Poem not found");
             ctx.status(HttpStatus.NOT_FOUND);

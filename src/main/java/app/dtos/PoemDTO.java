@@ -3,6 +3,8 @@ package app.dtos;
 import app.entities.Poem;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,4 +22,5 @@ public class PoemDTO {
             this.text = poem.getText();
             this.author = poem.getAuthor();
         }
+
 }

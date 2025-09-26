@@ -14,7 +14,7 @@ public class PoemRoutes {
 
        return () -> {
            get(handler::getAllPoems);
-           post(handler::createPoem);
+           post(handler::createPoems);
            path("/{id}", () -> {
                get(handler::getPoemById);
                put(handler::updatePoem);

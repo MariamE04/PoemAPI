@@ -1,5 +1,6 @@
 package app.entities;
 
+import app.dtos.PoemDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,5 +25,6 @@ public class Poem  {
 
     @Column(name="author", nullable = false)
     private String author;
+
 
 }

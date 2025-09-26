@@ -8,12 +8,11 @@ GET http://localhost:7071/api/poem/poems
 
 ###
 
-### Create new poem FEJLER
+### Create new poem
 POST http://localhost:7071/api/poem/poems
 Content-Type: application/json
 
 {
-  "id": 9,
   "style": "Lyric",
   "text": "Sing, O heart, of joy untold, where silver rivers gleam with gold. A melody that lifts the skies, in whispered notes where beauty lies.",
   "author": "ukendt/anonym"
@@ -46,4 +45,16 @@ DELETE http://localhost:7071/api/poem/poems/2
 
 ### poem deletion
 GET http://localhost:7071/api/poem/poems/2
+
+###
+
+### creat multiple poems at once
+POST http://localhost:7071/api/poem/poems
+Content-Type: application/json
+
+[
+  {"style": "Haiku", "text": "Over the wintry forest...", "author": "Soseki"},
+  {"style": "Limerick", "text": "There once was a coder named Mariam...", "author": "AI"}
+]
+
 
